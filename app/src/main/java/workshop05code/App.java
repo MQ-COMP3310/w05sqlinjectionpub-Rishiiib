@@ -74,12 +74,16 @@ public class App {
             String guess = scanner.nextLine();
 
             while (!guess.equals("q")) {
-                System.out.println("You've guessed '" + guess+"'.");
+                if (isValidInput(guess)) {
+                    System.out.println("You've guessed '" + guess + "'.");
 
-                if (wordleDatabaseConnection.isValidWord(guess)) { 
-                    System.out.println("Success! It is in the the list.\n");
-                }else{
-                    System.out.println("Sorry. This word is NOT in the the list.\n");
+                    if (wordleDatabaseConnection.isValidWord(guess)) {
+                        System.out.println("Success! It is in the list.\n");
+                    } else {
+                        System.out.println("Sorry. This word is NOT in the list.\n");
+                    }
+                } else {
+                    System.out.println("Invalid input. Please enter a 4 letter word.\n");
                 }
 
                 System.out.print("Enter a 4 letter word for a guess or q to quit: " );
@@ -89,5 +93,8 @@ public class App {
             e.printStackTrace();
         }
 
+    }
+    public static boolean isValidInput(String input) {
+        return input.matches("[a-zA-Z]{4}");
     }
 }
