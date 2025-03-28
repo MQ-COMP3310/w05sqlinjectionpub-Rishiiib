@@ -21,7 +21,7 @@ public class App {
         // must set before the Logger
         // loads logging.properties from the classpath
         try {// resources\logging.properties
-            LogManager.getLogManager().readConfiguration(new FileInputStream("resources/logging.properties"));
+            LogManager.getLogManager().readConfiguration(new FileInputStream("resources\\logging.properties"));
         } catch (SecurityException | IOException e1) {
             e1.printStackTrace();
         }
@@ -34,6 +34,10 @@ public class App {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
+        logger.log(Level.WARNING,"Your message.");
+        
+
         SQLiteConnectionManager wordleDatabaseConnection = new SQLiteConnectionManager("words.db");
 
         wordleDatabaseConnection.createNewDatabase("words.db");
@@ -83,7 +87,7 @@ public class App {
                         System.out.println("Sorry. This word is NOT in the list.\n");
                     }
                 } else {
-                    System.out.println("Invalid input. Please enter a 4 letter word.\n");
+                    System.out.println("Invalid input. Please enter a 4 letter lowercase word.\n");
                 }
 
                 System.out.print("Enter a 4 letter word for a guess or q to quit: " );
@@ -95,6 +99,6 @@ public class App {
 
     }
     public static boolean isValidInput(String input) {
-        return input.matches("[a-zA-Z]{4}");
+        return input.matches("[a-z]{4}");
     }
 }
