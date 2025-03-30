@@ -35,9 +35,6 @@ public class App {
      */
     public static void main(String[] args) {
 
-        logger.log(Level.WARNING,"Your message.");
-        
-
         SQLiteConnectionManager wordleDatabaseConnection = new SQLiteConnectionManager("words.db");
 
         wordleDatabaseConnection.createNewDatabase("words.db");
@@ -61,11 +58,13 @@ public class App {
             int i = 1;
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
+                logger.log(Level.WARNING,"Your message.");
                 wordleDatabaseConnection.addValidWord(i, line);
                 i++;
             }
 
         } catch (IOException e) {
+            logger.log(Level.INFO,"Not able to load.", e);
             System.out.println("Not able to load . Sorry!");
             System.out.println(e.getMessage());
             return;
@@ -87,6 +86,7 @@ public class App {
                         System.out.println("Sorry. This word is NOT in the list.\n");
                     }
                 } else {
+                    logger.log(Level.SEVERE,"Invalid input");
                     System.out.println("Invalid input. Please enter a 4 letter lowercase word.\n");
                 }
 
@@ -94,6 +94,7 @@ public class App {
                 guess = scanner.nextLine();
             }
         } catch (NoSuchElementException | IllegalStateException e) {
+            logger.log(Level.INFO,"Valid input.", e);
             e.printStackTrace();
         }
 

@@ -69,6 +69,7 @@ public class SQLiteConnectionManager {
 
             }
         } catch (SQLException e) {
+            logger.log(Level.SEVERE,"Your message.", e);
             System.out.println(e.getMessage());
         }
     }
@@ -88,6 +89,7 @@ public class SQLiteConnectionManager {
                     return true;
                 }
             } catch (SQLException e) {
+                logger.log(Level.SEVERE,"Your message.", e);
                 System.out.println(e.getMessage());
                 return false;
             }
@@ -113,6 +115,7 @@ public class SQLiteConnectionManager {
                 return true;
 
             } catch (SQLException e) {
+                logger.log(Level.SEVERE,"Your message.", e);
                 System.out.println(e.getMessage());
                 return false;
             }
@@ -136,6 +139,7 @@ public class SQLiteConnectionManager {
             pstmt.setString(2, word);
             pstmt.executeUpdate();
         } catch (SQLException e) {
+            logger.log(Level.INFO,"Valid input", e);
             System.out.println(e.getMessage());
         }
 
@@ -163,6 +167,7 @@ public class SQLiteConnectionManager {
             return false;
 
         } catch (SQLException e) {
+            logger.log(Level.SEVERE,"Your message.", e);
             System.out.println(e.getMessage());
             return false;
         }
